@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'test_drive_page.dart';
 
 void main() {
   runApp(CarShowroomApp());
@@ -171,19 +172,10 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // Записаться на тест-драйв — заглушка
-          showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-              title: Text('Тест‑драйв'),
-              content: Text('Форма записи — можно расширить.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text('Закрыть'),
-                ),
-              ],
-            ),
+          // Записаться на тест-драйв
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => TestDrivePage()),
           );
         },
         label: Text('Тест‑драйв'),
