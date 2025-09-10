@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'test_drive_page.dart';
+import 'registration_page.dart';
+import 'login_page.dart';
 
 void main() {
   runApp(CarShowroomApp());
@@ -135,7 +137,12 @@ class _HomePageState extends State<HomePage> {
           ),
           IconButton(
             icon: Icon(Icons.account_circle_outlined),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => RegistrationPage()),
+              );
+            },
             tooltip: 'Личный кабинет',
           ),
         ],
