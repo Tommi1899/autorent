@@ -5,8 +5,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class User {
+
     private String name;
-    private String  phone;
+    private String phone;
     private String email;
     private String car;
     private String date;
@@ -23,6 +24,7 @@ public class User {
 
     public String getPhone() {
         return phone;
+
     }
 
     public User() {}
