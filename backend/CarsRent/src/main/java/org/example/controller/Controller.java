@@ -2,16 +2,14 @@ package org.example.controller;
 
 
 import jakarta.servlet.http.HttpSession;
-import org.example.Cars.Car;
 import org.example.Users.User;
 import org.example.Users.UserLoginDto;
 import org.example.Users.UserRegistrationDto;
-import org.example.service.CarService;
+import org.example.reservation.Reserv;
+//import org.example.service.CarService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.*;
 
 
 @CrossOrigin
@@ -21,11 +19,11 @@ public class Controller {
     @Autowired
     private UserService service;
 
-    @Autowired
-    private CarService carService;
+//    @Autowired
+//    private CarService carService;
 
     @PostMapping("/reservation")
-    public String reservation(@RequestBody User user) {
+    public String reservation(@RequestBody Reserv user) {
         return service.reservationInit(user);
     }
 
@@ -34,9 +32,8 @@ public class Controller {
         User user = new User();
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-
-
+        user.setBirth(userDto.getBirth());
+        user.setPassword(service.hashPassword(userDto.getPassword()));
         return service.registrationInit(user);
     }
 
@@ -44,15 +41,15 @@ public class Controller {
     public String loginCheck(@RequestBody UserLoginDto userLogDto, HttpSession session) {
         User user = new User();
         user.setEmail(userLogDto.getEmail());
-        user.setPassword(userLogDto.getPassword());
+        user.setPassword(service.hashPassword(userLogDto.getPassword()));
 
 
 
         return service.loginAcces(user);
     }
-
-    @PostMapping("/addcar")
-    public String addCar(@RequestBody Car car) {
-        return carService.addCar(car);
-    }
+//
+//    @PostMapping("/addcar")
+//    public String addCar(@RequestBody Car car) {
+//        return carService.addCar(car);
+//    }
 }

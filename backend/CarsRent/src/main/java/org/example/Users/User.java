@@ -1,75 +1,37 @@
 package org.example.Users;
 
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 @Component
+@Setter
+@Getter
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "user_name", nullable = false)
     private String name;
-    private String phone;
+    @Column(name = "user_email", unique = true)
     private String email;
-    private String car;
-    private String date;
+    @Column(name = "user_birth")
+    private String birth;
+    @Column(name = "user_password")
     private String password;
 
-    public User(String name, String phone, String email, String car, String date, String password) {
+    public User(String name, String email, String birth, String password) {
         this.name = name;
-        this.phone = phone;
         this.email = email;
-        this.car = car;
-        this.date = date;
+        this.birth = birth;
         this.password = password;
-    }
-
-    public String getPhone() {
-        return phone;
-
-    }
-
-    public User() {}
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getCar() {
-        return car;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setCar(String car) {
-        this.car = car;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }
