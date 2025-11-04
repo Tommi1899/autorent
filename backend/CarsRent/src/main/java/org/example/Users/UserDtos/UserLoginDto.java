@@ -1,4 +1,4 @@
-package org.example.Users;
+package org.example.Users.UserDtos;
 
 public class UserLoginDto {
     private String email;

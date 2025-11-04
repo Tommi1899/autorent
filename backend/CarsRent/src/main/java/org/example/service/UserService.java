@@ -4,7 +4,6 @@ package org.example.service;
 import jakarta.persistence.NoResultException;
 import lombok.NoArgsConstructor;
 import org.example.Users.User;
-import org.example.reservation.Reserv;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,16 +45,6 @@ public class UserService {
         }
     }
 
-    public String reservationInit(Reserv user) {
-        try(Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            session.persist(user);
-            session.getTransaction().commit();
-            session.close();
-        }
-
-        return "Бронь оформлена";
-    }
 
     public String registrationInit(User user) {
 
@@ -63,7 +52,7 @@ public class UserService {
             session.beginTransaction();
             session.persist(user);
             session.getTransaction().commit();
-            session.close();
+
         }
 
 

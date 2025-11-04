@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.admin_module.order_module.order.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @Setter
@@ -27,6 +30,10 @@ public class User {
     private String birth;
     @Column(name = "user_password")
     private String password;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders;
+
 
     public User(String name, String email, String birth, String password) {
         this.name = name;
