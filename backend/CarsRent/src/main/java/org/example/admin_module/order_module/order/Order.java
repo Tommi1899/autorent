@@ -21,7 +21,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String balaljsdfljasdf;
     @ManyToOne
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private User client;
