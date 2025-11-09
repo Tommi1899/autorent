@@ -5,6 +5,7 @@ import org.example.Users.User;
 import org.example.Users.UserDtos.UserIdDto;
 import org.example.admin_module.order_module.order.Order;
 import org.example.admin_module.order_module.orderDto.OrderRequestDto;
+import org.example.admin_module.order_module.orderEnum.OrderStatus;
 import org.example.car_module.CarDto.CarIdDto;
 import org.example.car_module.cars.Car;
 import org.hibernate.Session;
@@ -25,7 +26,8 @@ public class OrderService {
     }
 
     public String saveOrder(OrderRequestDto dto) {
-        try(Session session = sessionFactory.openSession()) {
+        Session session = sessionFactory.openSession();
+        try {
 
             session.beginTransaction();
 
@@ -44,6 +46,29 @@ public class OrderService {
             session.getTransaction().commit();
 
             return "Заявка сохранена";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            session.close();
+        }
+    }
+
+    public String updateStatus(Long id, OrderStatus newStatus) {
+        Session session = sessionFactory.openSession();
+
+        try {
+            Order order = session.find(Order.class, id);
+            if (order == null) {
+                throw new RuntimeException("Ордер не найден!");
+            }
+
+            order.setStatus(newStatus);
+
+            return "Статус успешно изменен!";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            session.close();
         }
     }
 }

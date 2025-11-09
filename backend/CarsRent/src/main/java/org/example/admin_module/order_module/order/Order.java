@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.Users.User;
+import org.example.admin_module.order_module.orderEnum.OrderStatus;
+import org.example.admin_module.order_module.orderEnum.PaymentType;
 import org.example.car_module.cars.Car;
 
 import javax.annotation.processing.Generated;
@@ -22,6 +24,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String balaljsdfljasdf;
+
     @ManyToOne
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private User client;
@@ -29,6 +32,13 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
+
 
 //    private LocalDateTime createAt;
 //    private LocalDateTime confirmedAt;
@@ -45,6 +55,8 @@ public class Order {
     public Order(User client, Car car, String comment) {
         this.client = client;
         this.car = car;
+        this.status = status.NEW;
+        this.paymentType = paymentType;
         this.comment = comment;
     }
 }
