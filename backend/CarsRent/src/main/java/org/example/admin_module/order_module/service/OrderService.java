@@ -71,4 +71,25 @@ public class OrderService {
             session.close();
         }
     }
+
+    public String deleteOrder(Long id) {
+        Session session = sessionFactory.openSession();
+
+        try {
+            session.beginTransaction();
+            Order orderById = session.find(Order.class, id);
+            if (orderById != null) {
+                session.remove(orderById);
+            } else {
+                return "Ордер пустой!";
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            session.close();
+        }
+
+        return "Ордер не найден!";
+    }
 }
