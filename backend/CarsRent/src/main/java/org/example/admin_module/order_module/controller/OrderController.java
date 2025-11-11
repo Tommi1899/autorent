@@ -29,6 +29,11 @@ public class OrderController {
     public String updateStatus(@PathVariable("id") Long id, @RequestBody OrderStatus newStatus) {
         return service.updateStatus(id, newStatus);
     }
+
+    @DeleteMapping("/adminPanel/order_delete")
+    public String deleteOrder(@RequestBody Long id) {
+        return service.deleteOrder(id);
+    }
 }
 
 
